@@ -8,13 +8,11 @@ var accuracyScore = document.querySelector('#accuracy');
 var interval;
 
 var timerStarted = false;
-var timer = 10; // oprava, timer je ciselna promenna, ne string; globalni, protoze jinak kazdou nasledujici sekundu budeme zacinat od 10
-
-textArea.addEventListener('input', handleTextAreaInput);
+var timer = 10; 
 resetButton.addEventListener('click', resetAll);
 
 function countWords(str) {
-    var str = str.replace(/\W+/, ''); //vsechny znaky krome A-Z, 0-9 vyhodit
+    var str = str.replace(/\W+/, '');
     return str.split(' ').length;
 }
 
@@ -23,7 +21,7 @@ function countMistakes() {
     var typedText = textArea.value;
     var example = textExample.innerHTML;
     typedText = typedText.replace(/  +/g, ' ');
-    typedText = typedText.trim().split(' '); //vyhodit whitespace pred a po stringu, rozdelit na jednotliva slova 
+    typedText = typedText.trim().split(' ');
     example = example.split(' ');
     for (var i = 0; i < typedText.length; i++) {
         if (typedText[i] !== example[i]) {
@@ -33,14 +31,14 @@ function countMistakes() {
     return mistakesDone;
 }
 
-var char = 0; //poradove cislo pismena, lokalni protoze jinak bude furt pridavat prvni pismeno a nikdy se nezastavi
+var char = 0; 
 function typeWriter() {
-    var animatedText = document.querySelector('#intro'); // sem pismena se postupne ukladaji
-    var welcomeText = 'Welcome to Typing Speed Test'; //text to animate
-    if (char < welcomeText.length) { // podminka, aby se napsal pouze welcomeText a nic navic
-        animatedText.innerHTML += welcomeText.charAt(char); // ulozi pismeno do animatedText, += aby se pismena pridavali, ne zobrazovali po jednom
-        char++; // zvetsim hodnotu poradove cisla pismena
-        setTimeout(typeWriter, 100); // aby funkce se opakovala (jinak bude pouze prvni pismeno) + s efektem typewritingu, ne najdenou. 
+    var animatedText = document.querySelector('#intro'); 
+    var welcomeText = 'Welcome to Typing Speed Test';
+    if (char < welcomeText.length) {
+        animatedText.innerHTML += welcomeText.charAt(char);
+        char++; 
+        setTimeout(typeWriter, 100);
     }
 }
 
